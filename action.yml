@@ -7,11 +7,14 @@ inputs:
   appId:
     description: 'The Capawesome Cloud app ID.'
     required: true
+  channel:
+    description: 'The channel to deploy the bundle to.'
   path:
     description: 'The path to the bundle to upload. Must be a folder or zip archive.'
     required: true
-  channel:
-    description: 'The channel to deploy the bundle to.'
+  token:
+    description: 'The Capawesome Cloud API token.'
+    required: true
 
 runs:
   using: node20
