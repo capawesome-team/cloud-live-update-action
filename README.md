@@ -10,11 +10,14 @@ GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https:
     # The Capawesome Cloud app ID.
     # Required.
     appId: ''
+    # The channel to deploy the update to.
+    channel: ''
     # The path to the bundle to upload. Must be a folder or zip archive.
     # Required.
     path: ''
-    # The channel to deploy the update to.
-    channel: ''
+    # The Capawesome Cloud API token.
+    # Required.
+    token: ''
 ```
 
 ## Example
@@ -38,14 +41,11 @@ jobs:
         id: upload-action
         with:
           appId: 'addb597c-9cbd-4cdc-bcc0-cd5c2234a03f'
-          path: 'dist'
           channel: 'production-1.0.0'
-        env:
-          CAPAWESOME_TOKEN: ${{ secrets.CAPAWESOME_TOKEN }}
+          path: 'dist'
+          token: ${{ secrets.CAPAWESOME_TOKEN }}
 ```
 
 ## License
 
 See [LICENSE](./LICENSE).
-
-[^1]: This project is not affiliated with, endorsed by, sponsored by, or approved by Google LLC or any of their affiliates or subsidiaries. 

@@ -1,26 +1,52 @@
 import * as core from '@actions/core'
-import { exec } from './helpers/subprocess.mjs'
+import axios from 'axios'
+import FormData from 'form-data'
+import { createReadStream } from 'node:fs'
+import { isZipped, zipFolder } from './helpers/zip.mjs'
 
 export const run = async () => {
-  if (!process.env.CAPAWESOME_TOKEN) {
-    core.setFailed('Environment variable CAPAWESOME_TOKEN is required.')
-  }
-
   const appId = core.getInput('appId', {
     required: true
   })
+  const channel = core.getInput('channel')
   const path = core.getInput('path', {
     required: true
   })
-  const channel = core.getInput('channel')
+  const token = core.getInput('token', {
+    required: true
+  })
 
-  if (channel) {
-    await exec(
-      `npx capawesome apps:bundles:create --appId ${appId} --path ${path} --channel ${channel}`
-    )
+  // Create form data
+  const formData = new FormData()
+  if (isZipped(path)) {
+    formData.append('file', createReadStream(path))
   } else {
-    await exec(
-      `npx capawesome apps:bundles:create --appId ${appId} --path ${path}`
+    core.info('Zipping folder...')
+    const zipBuffer = await zipFolder(path)
+    formData.append('file', zipBuffer, { filename: 'bundle.zip' })
+  }
+  if (channel) {
+    formData.append('channelName', channel)
+  }
+  // Upload the bundle
+  core.info('Uploading...')
+  try {
+    const response = await axios.post(
+      `https://api.cloud.capawesome.io/v1/apps/${appId}/bundles`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
     )
+    core.info('Bundle successfully created.')
+    core.info(`Bundle ID: ${response.data.id}`)
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      core.setFailed(error.response?.data?.message)
+    } else {
+      core.setFailed('Failed to create bundle.')
+    }
   }
 }

@@ -41,7 +41,6 @@ jobs:
         id: test-action
         with:
           appId: ${{ secrets.CAPAWESOME_APP_ID }}
-          path: 'src'
           channel: 'test-1.0.0'
-        env:
-          CAPAWESOME_TOKEN: ${{ secrets.CAPAWESOME_TOKEN }}
+          path: 'src'
+          token: ${{ secrets.CAPAWESOME_TOKEN }}
