@@ -5,7 +5,7 @@ GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https:
 ## Usage
 
 ```yaml
-- uses: robingenz/action-firebase-cloud-storage-upload@v1.0.0
+- uses: capawesome-team/cloud-live-update-action@v0.0.1
   with:
     # The Capawesome Cloud app ID.
     # Required.
