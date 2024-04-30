@@ -3,6 +3,7 @@ import axios from 'axios'
 import FormData from 'form-data'
 import { createReadStream } from 'node:fs'
 import { isZipped, zipFolder } from './helpers/zip.mjs'
+import { AxiosError } from 'axios'
 
 export const run = async () => {
   const appId = core.getInput('appId', {

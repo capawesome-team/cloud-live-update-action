@@ -64097,7 +64097,7 @@ module.exports = index;
 
 __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
-/* harmony import */ var _run_mjs__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(4506);
+/* harmony import */ var _run_mjs__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(3828);
 
 
 
@@ -64112,7 +64112,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 4506:
+/***/ 3828:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -64882,7 +64882,7 @@ const isThenable = (thing) =>
  *
  * @returns {Error} The created error.
  */
-function AxiosError_AxiosError(message, code, config, request, response) {
+function AxiosError(message, code, config, request, response) {
   Error.call(this);
 
   if (Error.captureStackTrace) {
@@ -64899,7 +64899,7 @@ function AxiosError_AxiosError(message, code, config, request, response) {
   response && (this.response = response);
 }
 
-utils.inherits(AxiosError_AxiosError, Error, {
+utils.inherits(AxiosError, Error, {
   toJSON: function toJSON() {
     return {
       // Standard
@@ -64921,7 +64921,7 @@ utils.inherits(AxiosError_AxiosError, Error, {
   }
 });
 
-const AxiosError_prototype = AxiosError_AxiosError.prototype;
+const AxiosError_prototype = AxiosError.prototype;
 const descriptors = {};
 
 [
@@ -64942,11 +64942,11 @@ const descriptors = {};
   descriptors[code] = {value: code};
 });
 
-Object.defineProperties(AxiosError_AxiosError, descriptors);
+Object.defineProperties(AxiosError, descriptors);
 Object.defineProperty(AxiosError_prototype, 'isAxiosError', {value: true});
 
 // eslint-disable-next-line func-names
-AxiosError_AxiosError.from = (error, code, config, request, response, customProps) => {
+AxiosError.from = (error, code, config, request, response, customProps) => {
   const axiosError = Object.create(AxiosError_prototype);
 
   utils.toFlatObject(error, axiosError, function filter(obj) {
@@ -64955,7 +64955,7 @@ AxiosError_AxiosError.from = (error, code, config, request, response, customProp
     return prop !== 'isAxiosError';
   });
 
-  AxiosError_AxiosError.call(axiosError, error.message, code, config, request, response);
+  AxiosError.call(axiosError, error.message, code, config, request, response);
 
   axiosError.cause = error;
 
@@ -64966,7 +64966,7 @@ AxiosError_AxiosError.from = (error, code, config, request, response, customProp
   return axiosError;
 };
 
-/* harmony default export */ const core_AxiosError = (AxiosError_AxiosError);
+/* harmony default export */ const core_AxiosError = (AxiosError);
 
 // EXTERNAL MODULE: ./node_modules/form-data/lib/form_data.js
 var form_data = __nccwpck_require__(4334);
@@ -68814,7 +68814,35 @@ const zipFolder = async (sourceFolder) => {
 const isZipped = (path) => {
   return path.endsWith('.zip');
 }
+;// CONCATENATED MODULE: ./node_modules/axios/index.js
+
+
+// This module is intended to unwrap Axios default export as named.
+// Keep top-level export same with static properties
+// so that it can keep same with es module or cjs
+const {
+  Axios: axios_Axios,
+  AxiosError: axios_AxiosError,
+  CanceledError: axios_CanceledError,
+  isCancel: axios_isCancel,
+  CancelToken: axios_CancelToken,
+  VERSION: axios_VERSION,
+  all: axios_all,
+  Cancel,
+  isAxiosError: axios_isAxiosError,
+  spread: axios_spread,
+  toFormData: axios_toFormData,
+  AxiosHeaders: axios_AxiosHeaders,
+  HttpStatusCode: axios_HttpStatusCode,
+  formToJSON,
+  getAdapter,
+  mergeConfig: axios_mergeConfig
+} = lib_axios;
+
+
+
 ;// CONCATENATED MODULE: ./src/run.mjs
+
 
 
 
@@ -68860,7 +68888,7 @@ const run = async () => {
     core.info('Bundle successfully created.')
     core.info(`Bundle ID: ${response.data.id}`)
   } catch (error) {
-    if (error instanceof AxiosError) {
+    if (error instanceof axios_AxiosError) {
       core.setFailed(error.response?.data?.message)
     } else {
       core.setFailed('Failed to create bundle.')
