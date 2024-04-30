@@ -1,0 +1,18 @@
+name: 'Capawesome Cloud Live Update Action'
+description: 'Deploy a live update to the Capawesome Cloud.'
+author: 'Robin Genz <mail@robingenz.dev>'
+
+# Define your inputs here.
+inputs:
+  appId:
+    description: 'The Capawesome Cloud app ID.'
+    required: true
+  path:
+    description: 'The path to the bundle to upload. Must be a folder or zip archive.'
+    required: true
+  channel:
+    description: 'The channel to deploy the bundle to.'
+
+runs:
+  using: node20
+  main: dist/index.mjs
