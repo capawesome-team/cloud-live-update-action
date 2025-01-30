@@ -15,7 +15,11 @@ export const run = async () => {
   })
 
   // Save the token
-  await util.promisify(child.exec)(`npx capawesome login --token ${token}`)
+  const loginResult = await util.promisify(child.exec)(
+    `npx capawesome login --token ${token}`
+  )
+  console.log(loginResult.stdout)
+  console.error(loginResult.stderr)
   const whoami = await util.promisify(child.exec)(`npx capawesome whoami`)
   console.log(whoami.stdout)
   console.error(whoami.stderr)

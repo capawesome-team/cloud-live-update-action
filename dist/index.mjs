@@ -2826,7 +2826,11 @@ const run = async () => {
   })
 
   // Save the token
-  await external_util_.promisify(external_child_process_namespaceObject.exec)(`npx capawesome login --token ${token}`)
+  const loginResult = await external_util_.promisify(external_child_process_namespaceObject.exec)(
+    `npx capawesome login --token ${token}`
+  )
+  console.log(loginResult.stdout)
+  console.error(loginResult.stderr)
   const whoami = await external_util_.promisify(external_child_process_namespaceObject.exec)(`npx capawesome whoami`)
   console.log(whoami.stdout)
   console.error(whoami.stderr)
