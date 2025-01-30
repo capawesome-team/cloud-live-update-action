@@ -2835,13 +2835,15 @@ const run = async () => {
     required: true
   })
 
+  // Install the CLI
+  await exec('npm install -g @capawesome/cli@1.4.0')
   // Save the token
-  await exec(`npx @capawesome/cli@1.4.0 login --token ${token}`)
+  await exec(`npx capawesome login --token ${token}`)
   // Create the channel
   if (channel) {
     try {
       await exec(
-        `npx @capawesome/cli@1.4.0 apps:channels:create --appId ${appId} --name ${channel}`
+        `npx capawesome apps:channels:create --appId ${appId} --name ${channel}`
       )
     } catch {
       // No-op
@@ -2849,7 +2851,7 @@ const run = async () => {
   }
   // Create the bundle
   const result = await exec(
-    `npx @capawesome/cli@1.4.0 apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
+    `npx capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
   )
   core.info(result)
 }
