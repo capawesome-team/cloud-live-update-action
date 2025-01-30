@@ -2826,12 +2826,12 @@ const run = async () => {
   })
 
   // Save the token
-  await external_util_.promisify(external_child_process_namespaceObject.exec)(`capawesome login --token ${token}`)
+  await external_util_.promisify(external_child_process_namespaceObject.exec)(`npx capawesome login --token ${token}`)
   // Create the channel
   if (channel) {
     try {
       await external_util_.promisify(external_child_process_namespaceObject.exec)(
-        `capawesome apps:channels:create --appId ${appId} --name ${channel}`
+        `npx capawesome apps:channels:create --appId ${appId} --name ${channel}`
       )
     } catch {
       // No-op
@@ -2839,7 +2839,7 @@ const run = async () => {
   }
   // Create the bundle
   const result = await external_util_.promisify(external_child_process_namespaceObject.exec)(
-    `capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
+    `npx capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
   )
   core.info(result.stdout)
 }
