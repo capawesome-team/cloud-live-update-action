@@ -1,6 +1,6 @@
 # cloud-live-update-action
 
-GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https://capawesome.io/cloud/).
+GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https://cloud.capawesome.io/).
 
 ## Usage
 
