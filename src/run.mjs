@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
-import { $ } from 'zx'
+import * as util from 'util'
+import * as child from 'child_process'
 
 export const run = async () => {
   const appId = core.getInput('appId', {
@@ -13,7 +14,7 @@ export const run = async () => {
     required: true
   })
 
-  const result = await $`node -v`
+  const result = await util.promisify(child.exec)('node -v')
   core.info(result.stdout)
 
   // // Save the token
