@@ -17,7 +17,8 @@ export const run = async () => {
   // Save the token
   await util.promisify(child.exec)(`npx capawesome login --token ${token}`)
   const whoami = await util.promisify(child.exec)(`npx capawesome whoami`)
-  core.info(whoami.stdout)
+  console.log(whoami.stdout)
+  console.error(whoami.stderr)
   // Create the channel
   if (channel) {
     try {
@@ -32,5 +33,6 @@ export const run = async () => {
   const result = await util.promisify(child.exec)(
     `npx capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
   )
-  core.info(result.stdout)
+  console.log(result.stdout)
+  console.error(result.stderr)
 }
