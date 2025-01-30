@@ -14,19 +14,21 @@ export const run = async () => {
     required: true
   })
 
-  const result = await util.promisify(child.exec)('node -v')
+  // Save the token
+  await util.promisify(child.exec)(`capawesome login --token ${token}`)
+  // Create the channel
+  if (channel) {
+    try {
+      await util.promisify(child.exec)(
+        `capawesome apps:channels:create --appId ${appId} --name ${channel}`
+      )
+    } catch {
+      // No-op
+    }
+  }
+  // Create the bundle
+  const result = await util.promisify(child.exec)(
+    `capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
+  )
   core.info(result.stdout)
-
-  // // Save the token
-  // await $`capawesome login --token ${token}`
-  // // Create the channel
-  // if (channel) {
-  //   try {
-  //     await $`capawesome apps:channels:create --appId ${appId} --name ${channel}`
-  //   } catch {
-  //     // No-op
-  //   }
-  // }
-  // // Create the bundle
-  // await $`capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
 }

@@ -2825,21 +2825,23 @@ const run = async () => {
     required: true
   })
 
-  const result = await external_util_.promisify(external_child_process_namespaceObject.exec)('node -v')
+  // Save the token
+  await external_util_.promisify(external_child_process_namespaceObject.exec)(`capawesome login --token ${token}`)
+  // Create the channel
+  if (channel) {
+    try {
+      await external_util_.promisify(external_child_process_namespaceObject.exec)(
+        `capawesome apps:channels:create --appId ${appId} --name ${channel}`
+      )
+    } catch {
+      // No-op
+    }
+  }
+  // Create the bundle
+  const result = await external_util_.promisify(external_child_process_namespaceObject.exec)(
+    `capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
+  )
   core.info(result.stdout)
-
-  // // Save the token
-  // await $`capawesome login --token ${token}`
-  // // Create the channel
-  // if (channel) {
-  //   try {
-  //     await $`capawesome apps:channels:create --appId ${appId} --name ${channel}`
-  //   } catch {
-  //     // No-op
-  //   }
-  // }
-  // // Create the bundle
-  // await $`capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
 }
 
 
