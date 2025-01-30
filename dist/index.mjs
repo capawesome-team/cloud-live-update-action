@@ -2827,6 +2827,8 @@ const run = async () => {
 
   // Save the token
   await external_util_.promisify(external_child_process_namespaceObject.exec)(`npx capawesome login --token ${token}`)
+  const whoami = await external_util_.promisify(external_child_process_namespaceObject.exec)(`npx capawesome whoami`)
+  core.info(whoami.stdout)
   // Create the channel
   if (channel) {
     try {

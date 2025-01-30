@@ -16,6 +16,8 @@ export const run = async () => {
 
   // Save the token
   await util.promisify(child.exec)(`npx capawesome login --token ${token}`)
+  const whoami = await util.promisify(child.exec)(`npx capawesome whoami`)
+  core.info(whoami.stdout)
   // Create the channel
   if (channel) {
     try {
