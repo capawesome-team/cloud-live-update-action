@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import { $ } from 'zx'
 
 export const run = async () => {
   const appId = core.getInput('appId', {
