@@ -1,6 +1,5 @@
 import * as core from '@actions/core'
-import * as util from 'util'
-import * as child from 'child_process'
+import { exec } from './helpers/child-process.mjs'
 
 export const run = async () => {
   const appId = core.getInput('appId', {
@@ -15,20 +14,11 @@ export const run = async () => {
   })
 
   // Save the token
-  const loginResult = await util.promisify(child.exec)(
-    `npx @capawesome/cli@1.4.0 login --token ${token}`
-  )
-  console.log(loginResult.stdout)
-  console.error(loginResult.stderr)
-  const whoami = await util.promisify(child.exec)(
-    `npx @capawesome/cli@1.4.0 whoami`
-  )
-  console.log(whoami.stdout)
-  console.error(whoami.stderr)
+  await exec(`npx @capawesome/cli@1.4.0 login --token ${token}`)
   // Create the channel
   if (channel) {
     try {
-      await util.promisify(child.exec)(
+      await exec(
         `npx @capawesome/cli@1.4.0 apps:channels:create --appId ${appId} --name ${channel}`
       )
     } catch {
@@ -36,9 +26,8 @@ export const run = async () => {
     }
   }
   // Create the bundle
-  const result = await util.promisify(child.exec)(
+  const result = await exec(
     `npx @capawesome/cli@1.4.0 apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
   )
-  console.log(result.stdout)
-  console.error(result.stderr)
+  core.info(result)
 }

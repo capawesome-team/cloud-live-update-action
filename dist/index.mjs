@@ -2778,7 +2778,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 
 __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(186);
-/* harmony import */ var _run_mjs__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(913);
+/* harmony import */ var _run_mjs__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(884);
 
 
 
@@ -2793,7 +2793,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 913:
+/***/ 884:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -2808,8 +2808,18 @@ var core = __nccwpck_require__(186);
 var external_util_ = __nccwpck_require__(837);
 ;// CONCATENATED MODULE: external "child_process"
 const external_child_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("child_process");
-;// CONCATENATED MODULE: ./src/run.mjs
+;// CONCATENATED MODULE: ./src/helpers/child-process.mjs
 
+
+
+const exec = async (command) => {
+    const result = await external_util_.promisify(external_child_process_namespaceObject.exec)(command)
+    if (result.stderr) {
+        throw new Error(result.stderr)
+    } 
+    return result.stdout
+}
+;// CONCATENATED MODULE: ./src/run.mjs
 
 
 
@@ -2826,20 +2836,11 @@ const run = async () => {
   })
 
   // Save the token
-  const loginResult = await external_util_.promisify(external_child_process_namespaceObject.exec)(
-    `npx @capawesome/cli@1.4.0 login --token ${token}`
-  )
-  console.log(loginResult.stdout)
-  console.error(loginResult.stderr)
-  const whoami = await external_util_.promisify(external_child_process_namespaceObject.exec)(
-    `npx @capawesome/cli@1.4.0 whoami`
-  )
-  console.log(whoami.stdout)
-  console.error(whoami.stderr)
+  await exec(`npx @capawesome/cli@1.4.0 login --token ${token}`)
   // Create the channel
   if (channel) {
     try {
-      await external_util_.promisify(external_child_process_namespaceObject.exec)(
+      await exec(
         `npx @capawesome/cli@1.4.0 apps:channels:create --appId ${appId} --name ${channel}`
       )
     } catch {
@@ -2847,11 +2848,10 @@ const run = async () => {
     }
   }
   // Create the bundle
-  const result = await external_util_.promisify(external_child_process_namespaceObject.exec)(
+  const result = await exec(
     `npx @capawesome/cli@1.4.0 apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
   )
-  console.log(result.stdout)
-  console.error(result.stderr)
+  core.info(result)
 }
 
 
