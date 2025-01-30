@@ -2827,18 +2827,20 @@ const run = async () => {
 
   // Save the token
   const loginResult = await external_util_.promisify(external_child_process_namespaceObject.exec)(
-    `npx capawesome login --token ${token}`
+    `npx @capawesome/cli@1.4.0 login --token ${token}`
   )
   console.log(loginResult.stdout)
   console.error(loginResult.stderr)
-  const whoami = await external_util_.promisify(external_child_process_namespaceObject.exec)(`npx capawesome whoami`)
+  const whoami = await external_util_.promisify(external_child_process_namespaceObject.exec)(
+    `npx @capawesome/cli@1.4.0 whoami`
+  )
   console.log(whoami.stdout)
   console.error(whoami.stderr)
   // Create the channel
   if (channel) {
     try {
       await external_util_.promisify(external_child_process_namespaceObject.exec)(
-        `npx capawesome apps:channels:create --appId ${appId} --name ${channel}`
+        `npx @capawesome/cli@1.4.0 apps:channels:create --appId ${appId} --name ${channel}`
       )
     } catch {
       // No-op
@@ -2846,7 +2848,7 @@ const run = async () => {
   }
   // Create the bundle
   const result = await external_util_.promisify(external_child_process_namespaceObject.exec)(
-    `npx capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
+    `npx @capawesome/cli@1.4.0 apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
   )
   console.log(result.stdout)
   console.error(result.stderr)

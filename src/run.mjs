@@ -20,7 +20,9 @@ export const run = async () => {
   )
   console.log(loginResult.stdout)
   console.error(loginResult.stderr)
-  const whoami = await util.promisify(child.exec)(`npx @capawesome/cli@1.4.0 whoami`)
+  const whoami = await util.promisify(child.exec)(
+    `npx @capawesome/cli@1.4.0 whoami`
+  )
   console.log(whoami.stdout)
   console.error(whoami.stderr)
   // Create the channel
