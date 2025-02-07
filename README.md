@@ -29,7 +29,7 @@ on:
     branches:
       - main
 jobs:
-  uplaod-file:
+  upload-file:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
