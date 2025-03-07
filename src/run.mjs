@@ -35,7 +35,7 @@ export const run = async () => {
     --appId ${appId} \
     --channel ${channel} \
     --path ${path} \
-    --commit-message $(git log -1 --pretty=format:"%s") \
+    --commit-message "$(git log -1 --pretty=format:"%s")" \
     --commit-ref $(git rev-parse --abbrev-ref HEAD) \
     --commit-sha $(git rev-parse HEAD)`
   )
