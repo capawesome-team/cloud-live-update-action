@@ -12,6 +12,12 @@ GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https:
     appId: ''
     # The channel to deploy the update to.
     channel: ''
+    # The commit message that the bundle is linked to.'
+    commitMessage: ''
+    # The commit ref that the bundle is linked to.
+    commitRef: ''
+    # The commit SHA that the bundle is linked to.
+    commitSha: ''
     # The path to the bundle to upload. Must be a folder or zip archive.
     # Required.
     path: ''
@@ -42,6 +48,9 @@ jobs:
         with:
           appId: 'addb597c-9cbd-4cdc-bcc0-cd5c2234a03f'
           channel: 'production-1.0.0'
+          commitMessage: $(git log -1 --pretty=format:"%s")
+          commitRef: ${{ github.head_ref || github.ref_name }}
+          commitSha: ${{ github.sha }}
           path: 'dist'
           token: ${{ secrets.CAPAWESOME_TOKEN }}
 ```
