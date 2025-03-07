@@ -44,7 +44,7 @@ jobs:
         with:
           appId: ${{ secrets.CAPAWESOME_APP_ID }}
           channel: 'test-1.0.1'
-          commitMessage: ${{ github.event.head_commit.message }}
+          commitMessage: $(git log -1 --pretty=format:"%s")
           commitRef: ${{ github.head_ref || github.ref_name }}
           commitSha: ${{ github.event.pull_request.head.sha || github.sha }}
           path: 'src'
