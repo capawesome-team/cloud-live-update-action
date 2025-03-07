@@ -42,5 +42,8 @@ jobs:
         with:
           appId: ${{ secrets.CAPAWESOME_APP_ID }}
           channel: 'test-1.0.1'
+          commitMessage: $(git log -1 --pretty=format:"%s")
+          commitRef: ${{ github.head_ref || github.ref_name }}
+          commitSha: ${{ github.sha }}
           path: 'src'
           token: ${{ secrets.CAPAWESOME_TOKEN }}

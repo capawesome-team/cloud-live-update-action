@@ -2828,6 +2828,9 @@ const run = async () => {
     required: true
   })
   const channel = core.getInput('channel')
+  const commitMessage = core.getInput('commitMessage')
+  const commitRef = core.getInput('commitRef')
+  const commitSha = core.getInput('commitSha')
   const path = core.getInput('path', {
     required: true
   })
@@ -2857,9 +2860,9 @@ const run = async () => {
     --appId ${appId} \
     --channel ${channel} \
     --path ${path} \
-    --commit-message "$(git log -1 --pretty=format:"%s")" \
-    --commit-ref $(git rev-parse --abbrev-ref HEAD) \
-    --commit-sha $(git rev-parse HEAD)`
+    ${commitMessage ? `--commit-message "${commitMessage}"` : ''} \
+    ${commitRef ? `--commit-ref ${commitRef}` : ''} \
+    ${commitSha ? `--commit-sha ${commitSha}` : ''}`
   )
   core.info(result)
 }
