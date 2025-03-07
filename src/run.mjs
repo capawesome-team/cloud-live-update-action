@@ -14,14 +14,16 @@ export const run = async () => {
   })
 
   // Install the CLI
-  await exec('npm install -g @capawesome/cli@1.4.0')
+  await exec('npm install -g @capawesome/cli@1.6.0')
   // Save the token
   await exec(`npx capawesome login --token ${token}`)
   // Create the channel
   if (channel) {
     try {
       await exec(
-        `npx capawesome apps:channels:create --appId ${appId} --name ${channel}`
+        `npx capawesome apps:channels:create \
+          --appId ${appId} \
+          --name ${channel}`
       )
     } catch {
       // No-op
@@ -29,7 +31,13 @@ export const run = async () => {
   }
   // Create the bundle
   const result = await exec(
-    `npx capawesome apps:bundles:create --appId ${appId} --channel ${channel} --path ${path}`
+    `npx capawesome apps:bundles:create \
+    --appId ${appId} \
+    --channel ${channel} \
+    --path ${path} \
+    --commit-message $(git log -1 --pretty=format:"%s") \
+    --commit-ref $(git rev-parse --abbrev-ref HEAD) \
+    --commit-sha $(git rev-parse HEAD)`
   )
   core.info(result)
 }
