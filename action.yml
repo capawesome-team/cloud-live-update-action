@@ -9,6 +9,12 @@ inputs:
     required: true
   channel:
     description: 'The channel to deploy the bundle to.'
+  commitMessage:
+    description: 'The commit message of the Git commit that the bundle is linked to.'
+  commitRef:
+    description: 'The commit ref of the Git commit that the bundle is linked to.'
+  commitSha:
+    description: 'The commit SHA of the Git commit that the bundle is linked to.'
   path:
     description: 'The path to the bundle to upload. Must be a folder or zip archive.'
     required: true

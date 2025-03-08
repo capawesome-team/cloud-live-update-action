@@ -18,6 +18,8 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Node.js
         id: setup-node
         uses: actions/setup-node@v4
@@ -43,5 +45,8 @@ jobs:
         with:
           appId: ${{ secrets.CAPAWESOME_APP_ID }}
           channel: 'test-1.0.1'
+          commitMessage: $(git log -1 --pretty=format:"%s")
+          commitRef: ${{ github.head_ref || github.ref_name }}
+          commitSha: ${{ github.event.pull_request.head.sha || github.sha }}
           path: 'src'
           token: ${{ secrets.CAPAWESOME_TOKEN }}
