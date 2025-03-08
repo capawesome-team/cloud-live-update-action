@@ -2814,10 +2814,7 @@ const external_child_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(
 
 const exec = async (command) => {
     const result = await external_util_.promisify(external_child_process_namespaceObject.exec)(command)
-    if (result.stderr) {
-        throw new Error(result.stderr)
-    } 
-    return result.stdout
+    return result.stdout || result.stderr
 }
 ;// CONCATENATED MODULE: ./src/run.mjs
 
