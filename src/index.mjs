@@ -4,5 +4,5 @@ import { run } from './run.mjs'
 try {
   await run()
 } catch (error) {
-  core.setFailed(error.message)
+  core.setFailed(error)
 }
