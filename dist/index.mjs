@@ -2785,7 +2785,7 @@ __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependen
 try {
   await (0,_run_mjs__WEBPACK_IMPORTED_MODULE_1__/* .run */ .K)()
 } catch (error) {
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message)
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error)
 }
 
 __webpack_async_result__();
