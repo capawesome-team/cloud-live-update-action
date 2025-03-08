@@ -14,7 +14,7 @@ export const run = async () => {
   })
 
   // Install the CLI
-  await exec('npm install -g @capawesome/cli@1.4.0-dev.62a72e4.1741443606')
+  await exec('npm install -g @capawesome/cli@1.4.0-dev.62a72e4.1741443824')
   // Save the token
   await exec(`npx capawesome login --token ${token}`)
   // Create the channel
