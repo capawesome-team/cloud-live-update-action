@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.5](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.4...v0.0.5) (2025-03-18)
+
+
+### Features
+
+* create `www` directory and add `index.html` file for testing ([4287ee8](https://github.com/capawesome-team/cloud-live-update-action/commit/4287ee8cfa253cc2c9f79e1eb30a495c692e3c58))
+
+
+### Bug Fixes
+
+* update CLI version to 1.6.2 ([1109b0e](https://github.com/capawesome-team/cloud-live-update-action/commit/1109b0e8837546a5d3bed45b07415cad7ac45cbf))
+
 ## [0.0.4](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.3...v0.0.4) (2025-03-08)
 
 
