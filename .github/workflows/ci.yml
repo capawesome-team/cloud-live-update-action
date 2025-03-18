@@ -39,6 +39,8 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+      - name: Create `www` directory and `index.html` file
+        run: mkdir www && echo "<h1>Hello, world</h1>" > www/index.html
       - name: Test Local Action
         uses: ./
         id: test-action
@@ -48,5 +50,5 @@ jobs:
           commitMessage: $(git log -1 --pretty=format:"%s")
           commitRef: ${{ github.head_ref || github.ref_name }}
           commitSha: ${{ github.event.pull_request.head.sha || github.sha }}
-          path: 'src'
+          path: 'www'
           token: ${{ secrets.CAPAWESOME_TOKEN }}
