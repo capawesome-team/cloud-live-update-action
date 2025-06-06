@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.6](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.5...v0.0.6) (2025-06-06)
+
+
+### Bug Fixes
+
+* update CLI version to 1.13.1 ([5126ca1](https://github.com/capawesome-team/cloud-live-update-action/commit/5126ca17b49a90eafc344d227d7d8dd113f7dd7d)), closes [#7](https://github.com/capawesome-team/cloud-live-update-action/issues/7)
+
 ## [0.0.5](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.4...v0.0.5) (2025-03-18)
 
 
