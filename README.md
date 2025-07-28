@@ -5,7 +5,7 @@ GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https:
 ## Usage
 
 ```yaml
-- uses: capawesome-team/cloud-live-update-action@v0.0.6
+- uses: capawesome-team/cloud-live-update-action@v0.0.7
   with:
     # The Capawesome Cloud app ID.
     # Required.
@@ -43,7 +43,7 @@ jobs:
       - name: Build web assets
         run: npm run build
       - name: Deploy Live Update
-        uses: capawesome-team/cloud-live-update-action@v0.0.6
+        uses: capawesome-team/cloud-live-update-action@v0.0.7
         id: upload-action
         with:
           appId: 'addb597c-9cbd-4cdc-bcc0-cd5c2234a03f'
