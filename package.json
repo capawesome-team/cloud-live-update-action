@@ -1,7 +1,7 @@
 {
   "name": "cloud-live-update-action",
   "description": "GitHub Action to upload files to Firebase Cloud Storage.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Robin Genz <mail@robingenz.dev>",
   "private": true,
   "homepage": "https://github.com/capawesome-team/cloud-live-update-action#readme",
