@@ -1,5 +1,8 @@
 # cloud-live-update-action
 
+> [!WARNING]
+> This GitHub Action is in **maintenance mode**. We recommend using the [Capawesome CLI](https://capawesome.io/cloud/cli/) instead, which offers more flexibility and features. This action will only receive critical bug fixes and security updates going forward.
+
 GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https://cloud.capawesome.io/).
 
 ## Usage
