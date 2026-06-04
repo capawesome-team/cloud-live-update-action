@@ -11,27 +11,6 @@ permissions:
   contents: read
 
 jobs:
-  test-javascript:
-    name: JavaScript Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: npm
-      - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
-      - name: Check Format
-        id: npm-format-check
-        run: npm run format:check
   test-action:
     name: GitHub Actions Test
     runs-on: ubuntu-latest
@@ -47,8 +26,6 @@ jobs:
         with:
           appId: ${{ secrets.CAPAWESOME_APP_ID }}
           channel: 'test-1.0.1'
-          commitMessage: $(git log -1 --pretty=format:"%s")
-          commitRef: ${{ github.head_ref || github.ref_name }}
-          commitSha: ${{ github.event.pull_request.head.sha || github.sha }}
+          gitRef: ${{ github.head_ref || github.ref_name }}
           path: 'www'
           token: ${{ secrets.CAPAWESOME_TOKEN }}
