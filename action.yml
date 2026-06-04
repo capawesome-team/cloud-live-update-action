@@ -2,6 +2,10 @@ name: 'Capawesome Cloud Live Update Action for GitHub Actions'
 description: 'Deploy Live Updates with Capawesome Cloud.'
 author: 'Robin Genz <mail@robingenz.dev>'
 
+branding:
+  icon: 'arrow-up-circle'
+  color: 'purple'
+
 inputs:
   appId:
     description: 'The Capawesome Cloud app ID.'
