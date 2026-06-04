@@ -1,5 +1,5 @@
-name: 'Capawesome Cloud Live Update Action'
-description: 'Deploy a live update to the Capawesome Cloud.'
+name: 'Capawesome Cloud Live Update Action for GitHub Actions'
+description: 'Deploy Live Updates with Capawesome Cloud.'
 author: 'Robin Genz <mail@robingenz.dev>'
 
 inputs:
