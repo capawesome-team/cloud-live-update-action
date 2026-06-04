@@ -9,6 +9,10 @@ GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https:
 > [!NOTE]
 > The `token` is sensitive and must be stored as an [encrypted secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets) (e.g. `CAPAWESOME_TOKEN`) rather than hardcoded in the workflow. We recommend pinning the action to a fixed version (e.g. `@v0.1.0`) for reproducible builds, as no moving major-version tag is maintained.
 
+## Related Actions
+
+- [Capawesome Cloud Build Action](https://github.com/capawesome-team/cloud-build-action) — Create native iOS and Android app builds on Capawesome Cloud Runners.
+
 ## Usage
 
 ```yaml
