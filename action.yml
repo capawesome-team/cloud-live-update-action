@@ -2,26 +2,93 @@ name: 'Capawesome Cloud Live Update Action'
 description: 'Deploy a live update to the Capawesome Cloud.'
 author: 'Robin Genz <mail@robingenz.dev>'
 
-# Define your inputs here.
 inputs:
   appId:
     description: 'The Capawesome Cloud app ID.'
     required: true
+  androidEq:
+    description: 'The exact Android version code (`versionCode`) that the bundle does not support.'
+  androidMax:
+    description: 'The maximum Android version code (`versionCode`) that the bundle supports.'
+  androidMin:
+    description: 'The minimum Android version code (`versionCode`) that the bundle supports.'
+  artifactType:
+    description: 'The artifact type to deploy. Must be either `zip` or `manifest`. Defaults to `zip`.'
   channel:
     description: 'The channel to deploy the bundle to.'
-  commitMessage:
-    description: 'The commit message of the Git commit that the bundle is linked to.'
-  commitRef:
-    description: 'The commit ref of the Git commit that the bundle is linked to.'
-  commitSha:
-    description: 'The commit SHA of the Git commit that the bundle is linked to.'
+  customProperties:
+    description: 'Custom properties to assign to the bundle, one `key=value` pair per line. Maximum of 10.'
+  gitRef:
+    description: 'The Git reference (branch, tag, or commit SHA) to associate with the bundle.'
+  iosEq:
+    description: 'The exact iOS bundle version (`CFBundleVersion`) that the bundle does not support.'
+  iosMax:
+    description: 'The maximum iOS bundle version (`CFBundleVersion`) that the bundle supports.'
+  iosMin:
+    description: 'The minimum iOS bundle version (`CFBundleVersion`) that the bundle supports.'
   path:
     description: 'The path to the bundle to upload. Must be a folder or zip archive.'
     required: true
+  privateKey:
+    description: 'The private key to sign the bundle with. Either a path to a `.pem` file or the key content.'
+  rolloutPercentage:
+    description: 'The percentage of devices to deploy the bundle to (0-100). Defaults to 100.'
   token:
     description: 'The Capawesome Cloud API token.'
     required: true
 
 runs:
-  using: node20
-  main: dist/index.mjs
+  using: composite
+  steps:
+    - name: Create channel
+      if: inputs.channel != ''
+      shell: bash
+      env:
+        CAPAWESOME_TOKEN: ${{ inputs.token }}
+        APP_ID: ${{ inputs.appId }}
+        CHANNEL: ${{ inputs.channel }}
+      run: |
+        set -euo pipefail
+        echo "::add-mask::$CAPAWESOME_TOKEN"
+        npx -y @capawesome/cli@4.11.0 apps:channels:create \
+          --app-id "$APP_ID" \
+          --name "$CHANNEL" \
+          --ignore-errors
+    - name: Upload live update
+      shell: bash
+      env:
+        CAPAWESOME_TOKEN: ${{ inputs.token }}
+        APP_ID: ${{ inputs.appId }}
+        ANDROID_EQ: ${{ inputs.androidEq }}
+        ANDROID_MAX: ${{ inputs.androidMax }}
+        ANDROID_MIN: ${{ inputs.androidMin }}
+        ARTIFACT_TYPE: ${{ inputs.artifactType }}
+        CHANNEL: ${{ inputs.channel }}
+        CUSTOM_PROPERTIES: ${{ inputs.customProperties }}
+        GIT_REF: ${{ inputs.gitRef }}
+        IOS_EQ: ${{ inputs.iosEq }}
+        IOS_MAX: ${{ inputs.iosMax }}
+        IOS_MIN: ${{ inputs.iosMin }}
+        BUNDLE_PATH: ${{ inputs.path }}
+        PRIVATE_KEY: ${{ inputs.privateKey }}
+        ROLLOUT_PERCENTAGE: ${{ inputs.rolloutPercentage }}
+      run: |
+        set -euo pipefail
+        echo "::add-mask::$CAPAWESOME_TOKEN"
+        if [ -n "$PRIVATE_KEY" ]; then echo "::add-mask::$PRIVATE_KEY"; fi
+        args=(apps:liveupdates:upload --app-id "$APP_ID" --path "$BUNDLE_PATH" --yes)
+        if [ -n "$CHANNEL" ];            then args+=(--channel "$CHANNEL"); fi
+        if [ -n "$ARTIFACT_TYPE" ];      then args+=(--artifact-type "$ARTIFACT_TYPE"); fi
+        if [ -n "$GIT_REF" ];            then args+=(--git-ref "$GIT_REF"); fi
+        if [ -n "$PRIVATE_KEY" ];        then args+=(--private-key "$PRIVATE_KEY"); fi
+        if [ -n "$ROLLOUT_PERCENTAGE" ]; then args+=(--rollout-percentage "$ROLLOUT_PERCENTAGE"); fi
+        if [ -n "$ANDROID_MIN" ];        then args+=(--android-min "$ANDROID_MIN"); fi
+        if [ -n "$ANDROID_MAX" ];        then args+=(--android-max "$ANDROID_MAX"); fi
+        if [ -n "$ANDROID_EQ" ];         then args+=(--android-eq "$ANDROID_EQ"); fi
+        if [ -n "$IOS_MIN" ];            then args+=(--ios-min "$IOS_MIN"); fi
+        if [ -n "$IOS_MAX" ];            then args+=(--ios-max "$IOS_MAX"); fi
+        if [ -n "$IOS_EQ" ];             then args+=(--ios-eq "$IOS_EQ"); fi
+        while IFS= read -r property; do
+          if [ -n "$property" ]; then args+=(--custom-property "$property"); fi
+        done <<< "$CUSTOM_PROPERTIES"
+        npx -y @capawesome/cli@4.11.0 "${args[@]}"
