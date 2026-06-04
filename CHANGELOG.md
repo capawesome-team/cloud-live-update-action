@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.0](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.7...v0.1.0) (2026-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The `commitMessage`, `commitRef` and `commitSha` inputs have
+been removed. Use the `gitRef` input instead. See BREAKING.md for details.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* fix: escape and mask secrets line-by-line
+
+Address PR review: `::add-mask::` requires escaping `%`/`\r` and only masks
+a single line per command, so multi-line PEM private keys leaked into the log.
+Add a dedicated "Mask secrets" step that masks each line individually with
+proper escaping (add-mask is job-scoped, so it covers all subsequent steps).
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+### Features
+
+* rewrite as composite Bash action and update Capawesome CLI to 4.x ([#8](https://github.com/capawesome-team/cloud-live-update-action/issues/8)) ([37a9015](https://github.com/capawesome-team/cloud-live-update-action/commit/37a9015ec63a0dee70b1ba30f7de2581d6b1f469))
+
 ## [0.0.7](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.6...v0.0.7) (2025-07-28)
 
 ## [0.0.6](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.5...v0.0.6) (2025-06-06)
