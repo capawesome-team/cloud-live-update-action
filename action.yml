@@ -40,6 +40,24 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Mask secrets
+      shell: bash
+      env:
+        CAPAWESOME_TOKEN: ${{ inputs.token }}
+        PRIVATE_KEY: ${{ inputs.privateKey }}
+      run: |
+        set -euo pipefail
+        mask() {
+          local line escaped
+          while IFS= read -r line; do
+            if [ -z "$line" ]; then continue; fi
+            escaped="${line//%/%25}"
+            escaped="${escaped//$'\r'/%0D}"
+            echo "::add-mask::$escaped"
+          done <<< "$1"
+        }
+        mask "$CAPAWESOME_TOKEN"
+        mask "$PRIVATE_KEY"
     - name: Create channel
       if: inputs.channel != ''
       shell: bash
@@ -49,7 +67,6 @@ runs:
         CHANNEL: ${{ inputs.channel }}
       run: |
         set -euo pipefail
-        echo "::add-mask::$CAPAWESOME_TOKEN"
         npx -y @capawesome/cli@4.11.0 apps:channels:create \
           --app-id "$APP_ID" \
           --name "$CHANNEL" \
@@ -74,8 +91,6 @@ runs:
         ROLLOUT_PERCENTAGE: ${{ inputs.rolloutPercentage }}
       run: |
         set -euo pipefail
-        echo "::add-mask::$CAPAWESOME_TOKEN"
-        if [ -n "$PRIVATE_KEY" ]; then echo "::add-mask::$PRIVATE_KEY"; fi
         args=(apps:liveupdates:upload --app-id "$APP_ID" --path "$BUNDLE_PATH" --yes)
         if [ -n "$CHANNEL" ];            then args+=(--channel "$CHANNEL"); fi
         if [ -n "$ARTIFACT_TYPE" ];      then args+=(--artifact-type "$ARTIFACT_TYPE"); fi
