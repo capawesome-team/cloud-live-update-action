@@ -1,7 +1,7 @@
 # Capawesome Cloud Live Update Action for GitHub Actions
 
 [![CI](https://github.com/capawesome-team/cloud-live-update-action/actions/workflows/ci.yml/badge.svg)](https://github.com/capawesome-team/cloud-live-update-action/actions/workflows/ci.yml)
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Capawesome%20Cloud%20Live%20Update-blue?logo=github)](https://github.com/marketplace/actions/capawesome-cloud-live-update-action)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Capawesome%20Cloud%20Live%20Update-blue?logo=github)](https://github.com/marketplace/actions/capawesome-cloud-live-update-action-for-github-actions)
 [![License](https://img.shields.io/github/license/capawesome-team/cloud-live-update-action)](./LICENSE)
 
 GitHub Action to deploy a Capacitor Live Update to the [Capawesome Cloud](https://cloud.capawesome.io/).
