@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.1](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.1.0...v0.1.1) (2026-07-13)
+
+
+### Features
+
+* support cloud builds and self-hosted bundles ([bc1af8d](https://github.com/capawesome-team/cloud-live-update-action/commit/bc1af8d6f7ccc4f761fff227c2eb03bd19d0a4ca))
+
 ## [0.1.0](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.0.7...v0.1.0) (2026-06-04)
 
 
