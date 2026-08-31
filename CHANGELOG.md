@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [release-please](https://github.com/googleapis/release-please) for commit guidelines.
 
+## [0.1.2](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.1.1...v0.1.2) (2026-08-31)
+
+
+### Bug Fixes
+
+* update CLI version to 4.18.4 ([c34243a](https://github.com/capawesome-team/cloud-live-update-action/commit/c34243a06b863700dc0ac45b5d74680fda879c86))
+
 ## [0.1.1](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.1.0...v0.1.1) (2026-07-13)
 
 
