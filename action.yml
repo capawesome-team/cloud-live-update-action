@@ -105,7 +105,7 @@ runs:
           done <<< "$input"
         }
         while IFS= read -r channel; do
-          npx -y @capawesome/cli@4.11.0 apps:channels:create \
+          npx -y @capawesome/cli@4.18.4 apps:channels:create \
             --app-id "$APP_ID" \
             --name "$channel" \
             --ignore-errors
@@ -183,4 +183,4 @@ runs:
         if [ "$command" = "apps:liveupdates:upload" ] || [ "$command" = "apps:liveupdates:register" ]; then
           if [ -n "$PRIVATE_KEY" ]; then args+=(--private-key "$PRIVATE_KEY"); fi
         fi
-        npx -y @capawesome/cli@4.11.0 "${args[@]}"
+        npx -y @capawesome/cli@4.18.4 "${args[@]}"
