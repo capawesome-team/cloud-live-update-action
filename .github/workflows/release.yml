@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    if: github.repository == 'capawesome-team/cloud-live-update-action'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release pull request or GitHub release
+        uses: googleapis/release-please-action@v4

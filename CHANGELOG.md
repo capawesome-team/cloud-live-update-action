@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [release-please](https://github.com/googleapis/release-please) for commit guidelines.
 
 ## [0.1.1](https://github.com/capawesome-team/cloud-live-update-action/compare/v0.1.0...v0.1.1) (2026-07-13)
 

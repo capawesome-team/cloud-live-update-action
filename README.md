@@ -15,7 +15,7 @@ The action supports all three deployment modes:
 The mode is detected automatically from the inputs you provide — see [Notes](#notes).
 
 > [!NOTE]
-> The `token` is sensitive and must be stored as an [encrypted secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets) (e.g. `CAPAWESOME_TOKEN`) rather than hardcoded in the workflow. We recommend pinning the action to a fixed version (e.g. `@v0.1.0`) for reproducible builds, as no moving major-version tag is maintained.
+> The `token` is sensitive and must be stored as an [encrypted secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets) (e.g. `CAPAWESOME_TOKEN`) rather than hardcoded in the workflow. We recommend pinning the action to a fixed version (e.g. `@v0.1.1`) for reproducible builds, as no moving major-version tag is maintained. <!-- x-release-please-version -->
 
 ## Related Actions
 
@@ -24,7 +24,7 @@ The mode is detected automatically from the inputs you provide — see [Notes](#
 ## Usage
 
 ```yaml
-- uses: capawesome-team/cloud-live-update-action@v0.1.0
+- uses: capawesome-team/cloud-live-update-action@v0.1.1 # x-release-please-version
   with:
     # The Capawesome Cloud app ID.
     # Required.
@@ -95,7 +95,7 @@ jobs:
       - name: Build web assets
         run: npm run build
       - name: Deploy Live Update
-        uses: capawesome-team/cloud-live-update-action@v0.1.0
+        uses: capawesome-team/cloud-live-update-action@v0.1.1 # x-release-please-version
         with:
           appId: 'addb597c-9cbd-4cdc-bcc0-cd5c2234a03f'
           channel: 'production-1.0.0'
@@ -119,7 +119,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Live Update
-        uses: capawesome-team/cloud-live-update-action@v0.1.0
+        uses: capawesome-team/cloud-live-update-action@v0.1.1 # x-release-please-version
         with:
           appId: 'addb597c-9cbd-4cdc-bcc0-cd5c2234a03f'
           channel: 'production-1.0.0'
@@ -143,7 +143,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Live Update
-        uses: capawesome-team/cloud-live-update-action@v0.1.0
+        uses: capawesome-team/cloud-live-update-action@v0.1.1 # x-release-please-version
         with:
           appId: 'addb597c-9cbd-4cdc-bcc0-cd5c2234a03f'
           channel: 'production-1.0.0'
