@@ -17,6 +17,7 @@ permissions:
 jobs:
   test-action:
     name: GitHub Actions Test
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
