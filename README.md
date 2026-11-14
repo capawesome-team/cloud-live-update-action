@@ -29,7 +29,7 @@ The mode is detected automatically from the inputs you provide — see [Notes](#
     # The Capawesome Cloud app ID.
     # Required.
     appId: ''
-    # The exact Android version code (`versionCode`) that the bundle does not support.
+    # The exact Android version code (`versionCode`) of the native binary that already includes this bundle. Devices on that version do not download it while they run their built-in bundle.
     androidEq: ''
     # The maximum Android version code (`versionCode`) that the bundle supports.
     androidMax: ''
@@ -47,7 +47,7 @@ The mode is detected automatically from the inputs you provide — see [Notes](#
     environment: ''
     # The Git reference (branch, tag, or commit SHA) to associate with the bundle. For cloud builds, the reference that is built.
     gitRef: ''
-    # The exact iOS bundle version (`CFBundleVersion`) that the bundle does not support.
+    # The exact iOS bundle version (`CFBundleVersion`) of the native binary that already includes this bundle. Devices on that version do not download it while they run their built-in bundle.
     iosEq: ''
     # The maximum iOS bundle version (`CFBundleVersion`) that the bundle supports.
     iosMax: ''
